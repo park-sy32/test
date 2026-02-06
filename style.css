@@ -1,1 +1,129 @@
-/* Add styles here */
+:root {
+    --bg-color: #f0f2f5;
+    --container-bg: white;
+    --text-color: #333;
+    --score-text: #555;
+    --btn-bg: #fff;
+    --btn-border: #ddd;
+    --btn-hover-bg: #e3f2fd;
+    --btn-hover-border: #2196f3;
+    --result-bg: #f8f9fa;
+    --details-text: #777;
+    --shadow-color: rgba(0,0,0,0.1);
+}
+
+body.dark-mode {
+    --bg-color: #1a1a1a;
+    --container-bg: #2c2c2c;
+    --text-color: #f0f0f0;
+    --score-text: #bbb;
+    --btn-bg: #333;
+    --btn-border: #555;
+    --btn-hover-bg: #444;
+    --btn-hover-border: #66aaff;
+    --result-bg: #222;
+    --details-text: #aaa;
+    --shadow-color: rgba(255,255,255,0.1);
+}
+
+body {
+    font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.game-container {
+    background-color: var(--container-bg);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    color: var(--text-color);
+    margin: 0;
+}
+
+.theme-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+.score-board {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--score-text);
+}
+
+.choices {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.btn {
+    background-color: var(--btn-bg);
+    border: 2px solid var(--btn-border);
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn:hover {
+    background-color: var(--btn-hover-bg);
+    border-color: var(--btn-hover-border);
+    transform: scale(1.1);
+}
+
+.result-area {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: var(--result-bg);
+    border-radius: 10px;
+    transition: background-color 0.3s;
+}
+
+.result-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 10px 0;
+    color: var(--text-color);
+}
+
+.win { color: #2ecc71; }
+.lose { color: #e74c3c; }
+.draw { color: #95a5a6; }
+
+.details {
+    font-size: 0.9rem;
+    color: var(--details-text);
+}
