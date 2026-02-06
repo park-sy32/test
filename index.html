@@ -1,14 +1,161 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가위바위보 게임</title>
+    <style>
+        body {
+            font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .game-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .score-board {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .choices {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            background-color: #fff;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn:hover {
+            background-color: #e3f2fd;
+            border-color: #2196f3;
+            transform: scale(1.1);
+        }
+
+        .result-area {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .result-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .win { color: #2ecc71; }
+        .lose { color: #e74c3c; }
+        .draw { color: #95a5a6; }
+
+        .details {
+            font-size: 0.9rem;
+            color: #777;
+        }
+    </style>
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+
+    <div class="game-container">
+        <h1>가위바위보 게임</h1>
+        
+        <div class="score-board">
+            <span id="user-score">나: 0</span>
+            <span id="comp-score">컴퓨터: 0</span>
+        </div>
+
+        <div class="choices">
+            <button class="btn" onclick="play('가위')">✌️</button>
+            <button class="btn" onclick="play('바위')">✊</button>
+            <button class="btn" onclick="play('보')">🖐</button>
+        </div>
+
+        <div class="result-area">
+            <div id="result-message" class="result-text">게임을 시작하세요!</div>
+            <div id="game-details" class="details">무엇을 내시겠습니까?</div>
+        </div>
+    </div>
+
+    <script>
+        let userScore = 0;
+        let compScore = 0;
+
+        function play(userChoice) {
+            const choices = ['가위', '바위', '보'];
+            const emojis = { '가위': '✌️', '바위': '✊', '보': '🖐' };
+            
+            // 컴퓨터의 랜덤 선택
+            const compChoice = choices[Math.floor(Math.random() * 3)];
+            
+            let result = '';
+            let cssClass = '';
+
+            // 승패 로직
+            if (userChoice === compChoice) {
+                result = "비겼습니다!";
+                cssClass = "draw";
+            } else if (
+                (userChoice === '가위' && compChoice === '보') ||
+                (userChoice === '바위' && compChoice === '가위') ||
+                (userChoice === '보' && compChoice === '바위')
+            ) {
+                result = "이겼습니다! 🎉";
+                cssClass = "win";
+                userScore++;
+            } else {
+                result = "졌습니다... 😭";
+                cssClass = "lose";
+                compScore++;
+            }
+
+            // 결과 화면 업데이트
+            const resultMsg = document.getElementById('result-message');
+            const details = document.getElementById('game-details');
+            
+            resultMsg.textContent = result;
+            resultMsg.className = 'result-text ' + cssClass;
+            
+            details.innerHTML = `나: ${emojis[userChoice]} vs 컴퓨터: ${emojis[compChoice]}`;
+
+            // 점수 업데이트
+            document.getElementById('user-score').textContent = `나: ${userScore}`;
+            document.getElementById('comp-score').textContent = `컴퓨터: ${compScore}`;
+        }
+    </script>
 </body>
 </html>
